@@ -1,0 +1,7 @@
+set +o xtrace
+
+function install_cow() {
+    echo "INSTALLING COW"
+
+    git_clone https://github.com/misterzorgy2000/cow.git
+}

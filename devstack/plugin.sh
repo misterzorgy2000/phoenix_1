@@ -1,13 +1,13 @@
-function install_cow {
-    echo 'Install'
-}
+set +o xtrace
+
+. $DEST/cow/devstack/lib/cow
 
 function init_cow {
-    echo 'Init'
+    echo 'Init COW'
 }
 
 function configure_cow {
-    echo 'Configure'
+    echo 'Configure COW'
 }
 
 # check for service enabled
