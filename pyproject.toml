@@ -10,6 +10,7 @@ package-mode = false
 python = "^3.11"
 pendulum = "^3.0.0"
 colorama = "^0.4.6"
+flask = "^3.0.3"
 
 [tool.poetry.scripts]
 main_ai = "cow.ai:run_ai"
