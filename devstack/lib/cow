@@ -4,6 +4,13 @@ COW_CONF_DIR=/etc/cow
 COW_CONF=$COW_CONF_DIR/cow.conf
 COW_BIN_DIR=$COW_DIR/bin
 
+# Support entry points installation of console scripts
+if [[ -d $COW_DIR/bin ]]; then
+    COW_BIN_DIR=$COW_DIR/bin
+else
+    COW_BIN_DIR=$(get_python_exec_prefix)
+fi
+
 function init_cow() {
     echo_summary "Init Cow"
 }
