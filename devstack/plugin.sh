@@ -1,6 +1,6 @@
 set +o xtrace
 
-. $DEST/devstack-plugin-cow/devstack/lib/cow
+. $DEST/cow/devstack/lib/cow
 
 # check for service enabled
 if is_service_enabled cow; then
