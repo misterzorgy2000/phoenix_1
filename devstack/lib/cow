@@ -35,5 +35,5 @@ function stop_cow() {
 function start_cow() {
     sleep 10
     echo "---------------------------STARTING COW------------------------------"
-    run_process cow "$COW_BIN_DIR/cow --config-file $COW_CONF"
+    run_process cow "$COW_BIN_DIR/ai --config-file $COW_CONF"
 }
