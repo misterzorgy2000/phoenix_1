@@ -1,5 +1,5 @@
 set +o xtrace
-COW_DIR=$DEST/devstack-plugin-cow
+COW_DIR=$DEST/cow
 COW_CONF_DIR=/etc/cow
 COW_CONF=$COW_CONF_DIR/cow.conf
 COW_BIN_DIR=$COW_DIR/bin

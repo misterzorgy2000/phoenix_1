@@ -7,7 +7,6 @@ if is_service_enabled cow; then
     if [[ "$1" == "stack" && "$2" == "pre-install" ]]; then
         # Set up system services
         echo_summary "Configuring system services Cow"
-        install_cow 
 
     elif [[ "$1" == "stack" && "$2" == "install" ]]; then
         # Perform installation of service source
