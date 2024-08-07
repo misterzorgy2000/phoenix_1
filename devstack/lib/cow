@@ -10,6 +10,7 @@ function init_cow() {
 
 function install_cow() {
     echo_summary "Installing Cow"
+    setup_develop $COW_DIR
 }
 
 function configure_cow() {
