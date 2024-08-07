@@ -1,7 +1,31 @@
 set +o xtrace
+COW_DIR=$DEST/devstack-plugin-cow
+COW_CONF_DIR=/etc/cow
+COW_CONF=$COW_CONF_DIR/cow.conf
+COW_BIN_DIR=$COW_DIR/bin
+
+function init_cow() {
+    echo_summary "Init Cow"
+}
 
 function install_cow() {
-    echo "INSTALLING COW"
+    echo_summary "Installing Cow"
+}
 
-    git_clone https://github.com/misterzorgy2000/cow.git
+function configure_cow() {
+    echo_summary "Configure Cow"
+}
+
+function cleanup_cow() {
+    echo_summary "Cleanup Cow"
+}
+
+function stop_cow() {
+    echo_summary "Stop Cow"
+}
+
+function start_cow() {
+    sleep 10
+    echo "---------------------------STARTING COW------------------------------"
+    run_process cow "$COW_BIN_DIR/cow --config-file $COW_CONF"
 }
