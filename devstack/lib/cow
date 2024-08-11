@@ -55,4 +55,5 @@ function start_cow {
     echo "---------------------------STARTING COW------------------------------"
     run_process ai "$COW_BIN_DIR/ai --config-file $COW_CONF"
     run_process api "$COW_BIN_DIR/api --config-file $COW_CONF"
+    run_process cow-agent-notification "$COW_BIN_DIR/cow-agent-notification --config-file $COW_CONF"
 }
