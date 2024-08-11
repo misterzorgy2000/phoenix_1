@@ -21,8 +21,8 @@ from oslo_log import log
 import oslo_messaging
 from stevedore import named
 
-from ceilometer.i18n import _
-from ceilometer import messaging
+from cow.i18n import _
+from cow import messaging
 
 
 LOG = log.getLogger(__name__)

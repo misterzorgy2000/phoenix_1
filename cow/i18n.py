@@ -1,6 +1,4 @@
-# -*- encoding: utf-8 -*-
-#
-# Copyright 2014 OpenStack Foundation
+# Copyright 2014 Huawei Technologies Co., Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -14,22 +12,25 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import cotyledon
-from cotyledon import oslo_config_glue
-from oslo_log import log
+"""oslo.i18n integration module.
 
-from cow import notification
-from cow import service
+See https://docs.openstack.org/oslo.i18n/latest/user/usage.html
 
-LOG = log.getLogger(__name__)
+"""
+
+import oslo_i18n
+
+DOMAIN = 'cow'
+
+_translators = oslo_i18n.TranslatorFactory(domain=DOMAIN)
+
+# The primary translation function using the well-known name "_"
+_ = _translators.primary
 
 
-def main():
-    conf = service.prepare_service()
-    conf.log_opt_values(LOG, log.DEBUG)
+def translate(value, user_locale):
+    return oslo_i18n.translate(value, user_locale)
 
-    sm = cotyledon.ServiceManager()
-    sm.add(notification.NotificationService,
-           workers=conf.notification.workers, args=(conf,))
-    oslo_config_glue.setup(sm, conf)
-    sm.run()
+
+def get_available_languages():
+    return oslo_i18n.get_available_languages(DOMAIN)
