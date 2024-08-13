@@ -1,5 +1,6 @@
 from colorama import init, Fore
-from datetime import time, datetime
+from datetime import datetime
+import time
 
 init(autoreset=True)
 
@@ -8,10 +9,8 @@ def run_ai():
     print(Fore.RED + msg)
 
     while True:
-        with open("timestamp.txt", "a+") as f:
-            f.write("Текущая временная метка: " + str(datetime.now()))
-            f.close()
-        time.sleep(10)
+        print("Текущая временная метка: " + str(datetime.now()))
+        time.sleep(5)
 
 if __name__ == '__main__':
     run_ai()
