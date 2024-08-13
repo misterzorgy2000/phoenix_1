@@ -2,6 +2,7 @@ blinker==1.8.2
 click==8.1.7
 colorama==0.4.6
 Flask==3.0.3
+debugpy>=1.8.5
 iniconfig==2.0.0
 itsdangerous==2.2.0
 jedi==0.19.1
@@ -35,4 +36,3 @@ oslo.utils>=4.7.0
 oslo.privsep>=1.32.0
 pbr>=2.0.0
 oslo.cache>=1.26.0
-debugpy==1.8.5
