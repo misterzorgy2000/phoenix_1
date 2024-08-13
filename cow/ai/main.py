@@ -8,7 +8,7 @@ def run_ai():
     print(Fore.RED + msg)
 
     while True:
-        with open("timestamp.txt", "a") as f:
+        with open("timestamp.txt", "a+") as f:
             f.write("Текущая временная метка: " + str(datetime.now()))
             f.close()
         time.sleep(10)
