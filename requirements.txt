@@ -35,4 +35,4 @@ oslo.utils>=4.7.0
 oslo.privsep>=1.32.0
 pbr>=2.0.0
 oslo.cache>=1.26.0
-debugpy=1.8.5
+debugpy==1.8.5
