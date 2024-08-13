@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: python-cow
-Version: 0.0.1.dev29
+Version: 0.0.1.dev31
 Summary: Cow service
 Home-page: https://docs.openstack.org/cow/latest/
 Author: Hyperus
@@ -56,6 +56,7 @@ Requires-Dist: oslo.utils>=4.7.0
 Requires-Dist: oslo.privsep>=1.32.0
 Requires-Dist: pbr>=2.0.0
 Requires-Dist: oslo.cache>=1.26.0
+Requires-Dist: debugpy==1.8.5
 
 
 
