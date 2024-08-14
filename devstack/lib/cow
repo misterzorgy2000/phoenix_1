@@ -39,6 +39,7 @@ function create_cow_conf_file {
 
     iniset $COW_CONF api host "$(ipv6_unquote $COW_SERVICE_HOST)"
     iniset $COW_CONF notification driver "messagingv2"
+    iniset $COW_CONF notification workers 1
 }
 
 
