@@ -38,7 +38,7 @@ function create_cow_conf_file {
     iniset_rpc_backend COW $COW_CONF
 
     iniset $COW_CONF api host "$(ipv6_unquote $COW_SERVICE_HOST)"
-    iniset $COW_CONF oslo_messaging_notifications driver "messagingv2"
+    iniset $COW_CONF notification driver "messagingv2"
 }
 
 
