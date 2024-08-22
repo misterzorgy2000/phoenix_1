@@ -87,3 +87,4 @@ def get_notifier(transport, publisher_id):
     """Return a configured oslo_messaging notifier."""
     notifier = oslo_messaging.Notifier(transport, serializer=_SERIALIZER)
     return notifier.prepare(publisher_id=publisher_id)
+

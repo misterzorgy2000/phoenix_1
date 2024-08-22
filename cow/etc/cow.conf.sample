@@ -1,0 +1,14 @@
+[DEFAULT]
+api_version = 1
+endpoint_type = 'public'
+endpoint = 'http://10.1.101.30:8041'
+
+[ai]
+index_col = 'cpu'
+target_col = 'watt'
+one_hot_drop = 'if_binary'
+auto_class_weights = 'Balanced'
+n_splits = 5
+validation_metrics = 'f1', 'roc_auc'
+n_jobs = -1
+metrics = 'node_hwmon_temp_celsius', 'node_cpu_seconds_total',

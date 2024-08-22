@@ -123,11 +123,6 @@ class NotificationService(cotyledon.Service):
             on_missing_entrypoints_callback=self._log_missing_pipeline,
             invoke_args=(self.conf,))]
 
-        # FIXME(sileht): endpoint uses the notification_topics option
-        # and it should not because this is an oslo_messaging option
-        # not a ceilometer. Until we have something to get the
-        # notification_topics in another way, we must create a transport
-        # to ensure the option has been registered by oslo_messaging.
         messaging.get_notifier(messaging.get_transport(self.conf), '')
 
         endpoints = []
@@ -142,8 +137,7 @@ class NotificationService(cotyledon.Service):
         urls = self.conf.notification.messaging_urls or [None]
         for url in urls:
             transport = messaging.get_transport(self.conf, url)
-            # NOTE(gordc): ignore batching as we want pull
-            # to maintain sequencing as much as possible.
+
             listener = messaging.get_batch_notification_listener(
                 transport, targets, endpoints, allow_requeue=True,
                 batch_size=self.conf.notification.batch_size,
