@@ -1,9 +1,5 @@
 from os import makedirs
-import yaml
 import pandas as pd
-import datetime as dt
-import numpy as np
-from pprint import pp
 
 from cow.ai import DS_DATA_DIR
 from cow.gnocchi_client import GnocchiClient

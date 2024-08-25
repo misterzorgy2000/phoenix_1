@@ -2,7 +2,6 @@ import pandas as pd
 from sklearn.model_selection import StratifiedKFold, cross_validate
 import joblib
 import json
-import yaml
 import os
 
 from cow.ai import CV_RESULTS_DIR, DS_DATA_DIR, MODEL_DIR

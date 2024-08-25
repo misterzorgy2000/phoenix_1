@@ -10,3 +10,4 @@ oslo.messaging==14.8.1
 pandas==2.2.2
 pbr==6.0.0
 joblib==1.4.2
+scikit-learn==1.5.1
