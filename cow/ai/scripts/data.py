@@ -11,7 +11,7 @@ from cow import conf
 
 gnocchi = GnocchiClient(conf).client
 
-makedirs(DS_DATA_DIR, exist_ok=True)
+# makedirs(DS_DATA_DIR, exist_ok=True)
 
 def get_resource_list(type='prometheus'):
     return gnocchi.resource.list(type)
