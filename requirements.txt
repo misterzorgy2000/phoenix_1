@@ -4,7 +4,6 @@ cotyledon==1.7.3
 debugpy==1.8.5
 Flask==3.0.3
 gnocchiclient==7.0.8
-numpy==1.26.4
 oslo.config==9.5.0
 oslo.log==6.1.1
 oslo.messaging==14.8.1
