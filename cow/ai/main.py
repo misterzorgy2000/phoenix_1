@@ -20,16 +20,8 @@ NOTICE_MODEL_CREATED = {
 init(autoreset=True)
 
 def run_ai():    
-    # save_metrics()
-    # fit_model()
-    transport = get_notification_transport(cfg.CONF, 'rabbit://stackrabbit:secret@89.169.168.186:5672/')
-    notifier = oslo_messaging.Notifier(transport=transport, serializer=oslo_serializer.JsonPayloadSerializer(), topics=['notifications'])
-    notifier.prepare('compute.vagrant-precise')
-    try: 
-        notifier.info({}, 'compute.instance.create.end', NOTICE_MODEL_CREATED)
-        print('ok')
-    except Exception:
-        print(Exception)
+    save_metrics()
+    fit_model()    
         
 if __name__ == '__main__':
     run_ai()
