@@ -2,5 +2,5 @@ catboost==1.2.5
 colorama==0.4.5
 debugpy==1.8.5
 pandas==2.2.2
-joblib==1.4.2
+joblib==1.2.0
 scikit-learn==1.5.1
