@@ -3,4 +3,4 @@ colorama==0.4.5
 debugpy==1.8.5
 pandas==2.2.2
 joblib==1.2.0
-scikit-learn==1.5.1
+scikit-learn==1.1.2
