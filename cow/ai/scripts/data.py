@@ -7,12 +7,12 @@ from cow import conf
 
 gnocchi = GnocchiClient(conf).client
 
-makedirs(DS_DATA_DIR, exist_ok=True)
-
 def get_resource_list(type='prometheus'):
     return gnocchi.resource.list(type)
 
 def save_metrics():
+    makedirs(DS_DATA_DIR, exist_ok=True)
+    
     metric_ds = []
     metric_cols = conf.CONF.ai.metrics  
     target_cols = conf.CONF.ai.target
