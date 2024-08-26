@@ -2,7 +2,6 @@ catboost==1.2.5
 colorama==0.4.6
 cotyledon==1.7.3
 debugpy==1.8.5
-Flask==3.0.3
 gnocchiclient==7.0.8
 oslo.config==9.5.0
 oslo.log==6.1.1
