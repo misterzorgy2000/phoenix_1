@@ -11,7 +11,7 @@ def get_resource_list(type='prometheus'):
     return gnocchi.resource.list(type)
 
 def save_metrics():
-    makedirs(DS_DATA_DIR, exist_ok=True)
+    # makedirs(DS_DATA_DIR, exist_ok=True)
     
     metric_ds = []
     metric_cols = conf.CONF.ai.metrics  
@@ -33,7 +33,7 @@ def save_metrics():
         else:
             data = data.merge(df, on=['resource_id', 'ts'], how='inner')
 
-    data.to_csv(f'{DS_DATA_DIR}/data.csv')
+    # data.to_csv(f'{DS_DATA_DIR}/data.csv')
 
     return len(temp)
 
