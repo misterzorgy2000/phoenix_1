@@ -1,6 +1,7 @@
 catboost==1.2.5
 colorama==0.4.5
 contourpy==1.2.1
+cotyledon===1.7.3
 cycler==0.12.1
 debugpy==1.8.5
 fonttools==4.53.1
