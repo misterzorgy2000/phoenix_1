@@ -9,8 +9,8 @@ joblib==1.2.0
 kiwisolver==1.4.5
 matplotlib==3.9.2
 numpy==1.23.3
-packaging==24.1
-pandas==2.2.2
+packaging==23.1
+pandas>=2.1.0
 pillow==9.2.0
 plotly==5.23.0
 pyparsing==3.0.9
