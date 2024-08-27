@@ -22,14 +22,17 @@ from cow import notification
 from cow import service
 
 LOG = log.getLogger(__name__)
-
+import time
 
 def main():
-    conf = service.prepare_service()
-    conf.log_opt_values(LOG, log.DEBUG)
+#     conf = service.prepare_service()
+#     conf.log_opt_values(LOG, log.DEBUG)
 
-    sm = cotyledon.ServiceManager()
-    sm.add(notification.NotificationService,
-           workers=conf.notification.workers, args=(conf,))
-    oslo_config_glue.setup(sm, conf)
-    sm.run()
+#     sm = cotyledon.ServiceManager()
+#     sm.add(notification.NotificationService,
+#            workers=conf.notification.workers, args=(conf,))
+#     oslo_config_glue.setup(sm, conf)
+#     sm.run()
+       while True:
+              print(1)
+              time.sleep(100)
