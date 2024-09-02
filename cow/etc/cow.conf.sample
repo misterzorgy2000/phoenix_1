@@ -1,14 +1,30 @@
 [DEFAULT]
-api_version = 1
-endpoint_type = 'public'
-endpoint = 'http://10.1.101.30:8041'
+transport_url = rabbit://stackrabbit:secret@89.169.168.186:5672/
+control_exchange = ai
+debug = True
+
+[api]
+host = 89.169.168.186
 
 [ai]
-index_col = 'cpu'
-target_col = 'watt'
-one_hot_drop = 'if_binary'
-auto_class_weights = 'Balanced'
-n_splits = 5
-validation_metrics = 'f1', 'roc_auc'
-n_jobs = -1
-metrics = 'node_hwmon_temp_celsius', 'node_cpu_seconds_total',
+target='node_disk_read_bytes_total_y'
+one_hot_drop='if_binary'
+auto_class_weights='Balanced'
+n_splits=5
+scoring='f1', 'roc_auc'
+n_jobs=-1
+metrics='node_hwmon_temp_celsius','node_cpu_seconds_total','node_memory_MemTotal_bytes','node_memory_MemFree_bytes','node_disk_read_bytes_total_y' 
+
+[oslo_messaging_notifications]
+transport_url = rabbit://stackrabbit:secret@89.169.168.186:5672/
+topics=ai.notifications
+driver = messagingv2
+
+[gnocchi_client]
+api_version=1
+endpoint_type=public
+timespan=1440
+
+[schedule]
+cron_update_metrics="*/2 0 * * *"
+cron_fit_model="*/3 0 * * *"  

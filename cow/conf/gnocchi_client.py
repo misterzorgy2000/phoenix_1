@@ -5,18 +5,11 @@ gnocchi_client = cfg.OptGroup(name='gnocchi_client',
 
 GNOCCHI_CLIENT_OPTS = [
     cfg.StrOpt('api_version',
-               default='1',
-               help='Version of Gnocchi API to use in gnocchiclient.'),
-    cfg.StrOpt('endpoint_type',
-               default='public',
-               help='Type of endpoint to use in gnocchi client. '
-                    'Supported values: internal, public, admin. '
-                    'The default is public.'),
-    cfg.StrOpt('region_name',
-               help='Region in Identity service catalog to use for '
-                    'communication with the OpenStack service.'),
-    cfg.StrOpt('endpoint',
-               default='http://10.1.101.30:8041')
+               default='1'),
+    cfg.StrOpt('endpoint_type', default='public'),
+    cfg.StrOpt('region_name', default='default'),
+    cfg.StrOpt('timespan', default='1440'),
+    cfg.StrOpt('endpoint', default='localhost:8041')
 ]
 
 def register_opts(conf):
