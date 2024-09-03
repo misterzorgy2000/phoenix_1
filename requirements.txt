@@ -1,3 +1,4 @@
+APScheduler===3.10.1
 catboost===1.2.5
 colorama===0.4.6
 contourpy===1.2.1
@@ -10,6 +11,7 @@ joblib===1.2.0
 kiwisolver==1.4.5
 matplotlib==3.9.2
 numpy===1.24.2
+oslo.service===3.2.1
 packaging===23.1
 pandas>=2.1.0
 pillow===9.5.0

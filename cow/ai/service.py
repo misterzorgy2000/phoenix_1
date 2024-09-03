@@ -33,6 +33,7 @@ class AIService(service.ServiceBase):
         self.DEFAULT_VERSION = "0.0.1"
 
         if not os.path.exists(MODEL_VERSION_FILE):
+            Path.mkdir(MODEL_DIR, parents=True, exist_ok=True)
             self.version_file_path.touch()
 
         super().__init__()
