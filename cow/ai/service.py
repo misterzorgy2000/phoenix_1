@@ -27,14 +27,14 @@ class AIService(service.ServiceBase):
     def __init__(self, CONF=None):
         self.CONF = CONF
 
+        self.version_file_dir = Path(MODEL_DIR)
         self.version_file_path = Path(MODEL_VERSION_FILE)
 
         # TODO: update to pbr.version_string after moving to monorepo
         self.DEFAULT_VERSION = "0.0.1"
 
         if not os.path.exists(MODEL_VERSION_FILE):
-            Path.mkdir(MODEL_DIR, parents=True, exist_ok=True)
-            self.version_file_path.touch()
+            self.version_file_dir.mkdir(MODEL_DIRparents=True, exist_ok=True)
 
         super().__init__()
 
