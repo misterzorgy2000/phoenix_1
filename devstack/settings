@@ -2,4 +2,3 @@ define_plugin cow
 
 enable_service cow-ai
 enable_service cow-api
-enable_service cow-agent-notification
