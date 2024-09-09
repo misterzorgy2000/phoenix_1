@@ -8,6 +8,7 @@ import semantic_version
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from oslo_service import service
+from oslo_log import log as logging
 
 from cow.conf import CONF
 
@@ -22,8 +23,14 @@ PUBLISHER_ID = "ai"
 PROJECT = "ai"
 EXCHANGE = "ai"
 
+LOG = logging.getLogger(__name__)
+
+phoenix_singleton = None
 
 class AIService(service.ServiceBase):
+    #TODO: Singleton
+    __instances__ = {}
+    
     def __init__(self, CONF=None):
         self.CONF = CONF
 
@@ -34,11 +41,13 @@ class AIService(service.ServiceBase):
         self.DEFAULT_VERSION = "0.0.1"
 
         if not os.path.exists(MODEL_VERSION_FILE):
-            self.version_file_dir.mkdir(MODEL_DIRparents=True, exist_ok=True)
+            self.version_file_dir.mkdir(parents=True, exist_ok=True)
 
         super().__init__()
 
     def start(self):
+        print("Starting Phoenix AI")
+        
         cron_update = self.CONF.schedule.cron_update_metrics.split(" ")
         cron_fit = self.CONF.schedule.cron_fit_model.split(" ")
 
@@ -48,24 +57,29 @@ class AIService(service.ServiceBase):
         pass
 
     def stop(self):
-        print("Stopping AI service")
+        print("Stopping Phoenix AI")
 
     def reset(self):
-        print("Resetting AI service")
+        print("Resetting Phoenix AI service")
 
     def _save_metrics(self):
         # save_metrics()
         pass
 
-    def _fit_model(self):
-        fit_model([self._save_versioned_model, self._notify_updates])
+    def fit_save(self):
+        print("Starting model fit")
         
+        fit_model([self._save_versioned_model, self._notify_updates])        
         # TODO: uncomment evaluate after create working real-life model 
         # evaluate_model(self.__get_model_fullpath(self.version_file_path.read_text()))
 
+    @staticmethod
+    def get_latest_version():
+        return Path(MODEL_VERSION_FILE).read_text()
+        
     def _notify_updates(self, model=None):
         notifier = get_notifier(self.CONF, PUBLISHER_ID, PROJECT, EXCHANGE)
-        version = self.version_file_path.read_text()
+        version = self.get_latest_version()
 
         payload = {
             "created_at": time.time(),
@@ -81,7 +95,7 @@ class AIService(service.ServiceBase):
         new_version = self.DEFAULT_VERSION
 
         if os.path.exists(MODEL_VERSION_FILE):
-            curr_version = self.version_file_path.read_text()
+            curr_version = self.get_latest_version()
             new_version = str(semantic_version.Version(curr_version).next_patch())
         else:
             self.version_file_path.write_text(self.DEFAULT_VERSION)
@@ -94,7 +108,7 @@ class AIService(service.ServiceBase):
     def _schedule_update(self, cron_update, cron_fit):
         scheduler = AsyncIOScheduler()
         self.__add_cron_job(scheduler, self._save_metrics, cron_update)
-        self.__add_cron_job(scheduler, self._fit_model, cron_fit)
+        self.__add_cron_job(scheduler, self.fit_save, cron_fit)
 
         scheduler.start()
 
@@ -107,8 +121,9 @@ class AIService(service.ServiceBase):
 
     def __add_cron_job(self, scheduler, job, cron_args):
         second, minute, hour, day, month, year = cron_args
+        
         scheduler.add_job(
-            job, "cron", minute=minute, hour=hour, day=day, month=month, year=year, second=second
+            job, "cron", year=year, month=month, day=day, hour=hour, minute=minute, second=second,
         )
 
     def __get_model_fullpath(self, version):
@@ -117,9 +132,13 @@ class AIService(service.ServiceBase):
     def __get_model_filename(self, version):
         return f"model-v{version}.pkl"
 
+def get_service():
+    return phoenix_singleton
 
 def launch_ai_service(CONF):
     launcher = service.Launcher(CONF)
     launcher.launch_service(AIService(CONF))
 
+    #TODO: singleton
+    phoenix_singleton = launcher
     return launcher

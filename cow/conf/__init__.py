@@ -1,6 +1,6 @@
 from oslo_config import cfg
 import sys
-from cow.conf import ai, gnocchi_client, notification, schedule
+from cow.conf import ai, api, gnocchi_client, schedule
 
 from oslo_messaging._drivers import impl_rabbit
 
@@ -14,5 +14,6 @@ cfg.set_defaults(
 CONF = cfg.CONF
 
 ai.register_opts(CONF)
+api.register_opts(CONF)
 gnocchi_client.register_opts(CONF)
 schedule.register_opts(CONF)

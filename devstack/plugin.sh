@@ -3,7 +3,7 @@ set +o xtrace
 . $DEST/cow/devstack/lib/cow
 
 # check for service enabled
-if is_service_enabled cow-ai cow-api cow-agent-notification; then
+if is_service_enabled cow-ai cow-api; then
     if [[ "$1" == "stack" && "$2" == "pre-install" ]]; then
         # Set up system services
         echo_summary "Configuring system services Cow"
