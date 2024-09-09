@@ -1,7 +1,7 @@
 from colorama import init
 
 from cow.conf import CONF
-from cow.ai.api import run_api
+from cow.app.api import run as run_api
 from cow.ai.service import launch_ai_service
 
 init(autoreset=True)   
@@ -9,7 +9,7 @@ init(autoreset=True)
 def main():    
     service = launch_ai_service(CONF)
     
-    run_api(service)
+    run_api()
     
     service.wait()
         

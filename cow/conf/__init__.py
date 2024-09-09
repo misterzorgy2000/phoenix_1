@@ -4,7 +4,7 @@ from cow.conf import ai, api, gnocchi_client, schedule
 
 from oslo_messaging._drivers import impl_rabbit
 
-cfg.CONF(sys.argv[1:], project="cow")
+cfg.CONF(sys.argv[1:], project="phoenix")
 
 cfg.set_defaults(
     impl_rabbit.rabbit_opts,

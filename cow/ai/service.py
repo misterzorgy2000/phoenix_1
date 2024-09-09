@@ -25,12 +25,7 @@ EXCHANGE = "ai"
 
 LOG = logging.getLogger(__name__)
 
-phoenix_singleton = None
-
-class AIService(service.ServiceBase):
-    #TODO: Singleton
-    __instances__ = {}
-    
+class PhoenixAI(service.ServiceBase):
     def __init__(self, CONF=None):
         self.CONF = CONF
 
@@ -43,8 +38,10 @@ class AIService(service.ServiceBase):
         if not os.path.exists(MODEL_VERSION_FILE):
             self.version_file_dir.mkdir(parents=True, exist_ok=True)
 
+        self.__instance__ = self
+        
         super().__init__()
-
+    
     def start(self):
         print("Starting Phoenix AI")
         
@@ -69,10 +66,21 @@ class AIService(service.ServiceBase):
     def fit_save(self):
         print("Starting model fit")
         
-        fit_model([self._save_versioned_model, self._notify_updates])        
+        # fit_model([self._save_versioned_model, self._notify_updates])        
         # TODO: uncomment evaluate after create working real-life model 
-        # evaluate_model(self.__get_model_fullpath(self.version_file_path.read_text()))
+        evaluate_model(self.__get_model_fullpath(self.version_file_path.read_text()))
 
+    def evaluate(self):
+        return evaluate_model(self.__get_model_fullpath(self.version_file_path.read_text()))
+    
+    @staticmethod
+    def get_model_version(version):
+        model = None
+        with open(f"{MODEL_DIR}/model-v{version}.pkl", 'rb') as fd:
+            model = joblib.load(fd) 
+            
+        return model
+        
     @staticmethod
     def get_latest_version():
         return Path(MODEL_VERSION_FILE).read_text()
@@ -123,7 +131,8 @@ class AIService(service.ServiceBase):
         second, minute, hour, day, month, year = cron_args
         
         scheduler.add_job(
-            job, "cron", year=year, month=month, day=day, hour=hour, minute=minute, second=second,
+            # job, "cron", year=year, month=month, day=day, hour=hour, minute=minute, second=second,
+            job, "cron", second="*/30"
         )
 
     def __get_model_fullpath(self, version):
@@ -133,12 +142,13 @@ class AIService(service.ServiceBase):
         return f"model-v{version}.pkl"
 
 def get_service():
-    return phoenix_singleton
+    return PhoenixAI.get_instance()
 
 def launch_ai_service(CONF):
     launcher = service.Launcher(CONF)
-    launcher.launch_service(AIService(CONF))
+    launcher.launch_service(PhoenixAI(CONF))
 
-    #TODO: singleton
-    phoenix_singleton = launcher
+    # TODO: create singleton
+    # TODO: create interservice communication
+    PhoenixAI.instance = launcher.services.services[0]
     return launcher
