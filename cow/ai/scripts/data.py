@@ -17,7 +17,11 @@ def save_metrics():
     metric_cols = conf.CONF.ai.metrics  
     target_cols = conf.CONF.ai.target
         
-    prometheus_resources = gnocchi.resource.list('prometheus')
+    try:
+        prometheus_resources = gnocchi.resource.list('prometheus')
+    except Exception:
+        print(Exception)
+        
     node_job_resource = list(filter(lambda el: el['job'] == 'node', prometheus_resources))[0]
     resource_id = node_job_resource['id']
     timespan = int(conf.CONF.gnocchi_client.timespan)

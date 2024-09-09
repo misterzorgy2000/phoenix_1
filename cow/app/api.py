@@ -54,8 +54,6 @@ def predict():
         print(data)
         
         raise(f'Prediction failed. Cause: {Exception}')
-    
-
 
 @app.route(f'{prefix}/version')
 def version():

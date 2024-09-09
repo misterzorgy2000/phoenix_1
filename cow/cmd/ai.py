@@ -9,7 +9,7 @@ init(autoreset=True)
 def main():    
     service = launch_ai_service(CONF)
     
-    run_api()
+    # run_api()
     
     service.wait()
         

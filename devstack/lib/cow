@@ -51,6 +51,7 @@ function create_cow_conf_file {
 
     iniset $COW_CONF gnocchi_client api_version "1"
     iniset $COW_CONF gnocchi_client endpoint_type "public"
+    iniset $COW_CONF gnocchi_client endpoint "localhost:8041"    
     iniset $COW_CONF gnocchi_client timespan "1440"
 
     iniset $COW_CONF schedule cron_update_metrics "*/2 0 \* \* \* \*"

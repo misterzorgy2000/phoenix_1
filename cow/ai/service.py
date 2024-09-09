@@ -60,14 +60,12 @@ class PhoenixAI(service.ServiceBase):
         print("Resetting Phoenix AI service")
 
     def _save_metrics(self):
-        # save_metrics()
-        pass
+        save_metrics()
 
     def fit_save(self):
         print("Starting model fit")
         
-        # fit_model([self._save_versioned_model, self._notify_updates])        
-        # TODO: uncomment evaluate after create working real-life model 
+        fit_model([self._save_versioned_model, self._notify_updates])        
         evaluate_model(self.__get_model_fullpath(self.version_file_path.read_text()))
 
     def evaluate(self):
@@ -116,7 +114,7 @@ class PhoenixAI(service.ServiceBase):
     def _schedule_update(self, cron_update, cron_fit):
         scheduler = AsyncIOScheduler()
         self.__add_cron_job(scheduler, self._save_metrics, cron_update)
-        self.__add_cron_job(scheduler, self.fit_save, cron_fit)
+        # self.__add_cron_job(scheduler, self.fit_save, cron_fit)
 
         scheduler.start()
 
