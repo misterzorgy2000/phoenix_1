@@ -107,6 +107,7 @@ class AIService(service.ServiceBase):
 
     def _schedule_update(self, cron_update, cron_fit):
         scheduler = AsyncIOScheduler()
+        
         self.__add_cron_job(scheduler, self._save_metrics, cron_update)
         self.__add_cron_job(scheduler, self.fit_save, cron_fit)
 
