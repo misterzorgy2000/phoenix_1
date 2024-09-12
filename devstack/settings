@@ -1,4 +1,4 @@
-define_plugin cow
+define_plugin phoenix
 
-enable_service cow-ai
-enable_service cow-api
+enable_service phoenix-ai
+enable_service phoenix-api

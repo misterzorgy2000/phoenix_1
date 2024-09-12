@@ -1,0 +1,74 @@
+set +o xtrace
+PHOENIX_DIR=$DEST/phoenix
+PHOENIX_CONF_DIR=/etc/phoenix
+PHOENIX_CONF=$PHOENIX_CONF_DIR/phoenix.conf
+PHOENIX_BIN_DIR=$PHOENIX_DIR/bin
+
+PHOENIX_SERVICE_HOST=${PHOENIX_SERVICE_HOST:-$SERVICE_HOST}
+# Support entry points installation of console scripts
+if [[ -d $PHOENIX_DIR/bin ]]; then
+    PHOENIX_BIN_DIR=$PHOENIX_DIR/bin
+else
+    PHOENIX_BIN_DIR=$(get_python_exec_prefix)
+fi
+
+function init_phoenix {
+    echo_summary "Init Phoenix"
+}
+
+function install_phoenix {
+    echo_summary "Installing Phoenix"
+    setup_develop $PHOENIX_DIR
+}
+
+function configure_phoenix {
+    echo_summary "Configuring Phoenix"
+
+    sudo install -d -o $STACK_USER $PHOENIX_CONF_DIR
+
+    create_phoenix_conf_file
+}
+
+function create_phoenix_conf_file {
+    echo_summary "Creating Phoenix conf file"
+
+    rm -f $PHOENIX_CONF
+    
+    iniset $PHOENIX_CONF DEFAULT debug "$ENABLE_DEBUG_LOG_LEVEL"
+    iniset_rpc_backend PHOENIX $PHOENIX_CONF
+
+    iniset $PHOENIX_CONF api host "$(ipv6_unquote $PHOENIX_SERVICE_HOST)"
+    iniset $PHOENIX_CONF oslo_messaging_notifications driver "messagingv2"
+    iniset $PHOENIX_CONF oslo_messaging_notifications topics "ai.notifications"
+
+    iniset $PHOENIX_CONF ai target "node_disk_read_bytes_total_y"
+    iniset $PHOENIX_CONF ai one_hot_drop "if_binary"
+    iniset $PHOENIX_CONF ai auto_class_weights "Balanced"
+    iniset $PHOENIX_CONF ai n_splits "5"
+    iniset $PHOENIX_CONF ai validation_metrics "f1, roc_auc"
+    iniset $PHOENIX_CONF ai n_jobs "-1"
+    iniset $PHOENIX_CONF ai metrics "node_hwmon_temp_celsius, node_cpu_seconds_total, node_memory_MemTotal_bytes, node_memory_MemFree_bytes, node_disk_read_bytes_total_y" 
+
+    iniset $PHOENIX_CONF gnocchi_client api_version "1"
+    iniset $PHOENIX_CONF gnocchi_client endpoint_type "public"
+    iniset $PHOENIX_CONF gnocchi_client endpoint "localhost:8041"    
+    iniset $PHOENIX_CONF gnocchi_client timespan "1440"
+
+    iniset $PHOENIX_CONF schedule cron_update_metrics "*\* \* \* 1 \* \*"
+    iniset $PHOENIX_CONF cron_fit_model cron_update_metrics "\* \* \* 1 \* \*"
+}
+
+
+function cleanup_phoenix {
+    echo_summary "Cleanup PHOENIX"
+}
+
+function stop_phoenix {
+    echo_summary "Stop PHOENIX"
+}
+
+function start_phoenix {
+    echo "---------------------------STARTING PHOENIX------------------------------"
+    run_process phoenix-ai "$PHOENIX_BIN_DIR/phoenix-ai --config-file $PHOENIX_CONF"
+    run_process phoenix-api "$PHOENIX_BIN_DIR/phoenix-api --config-file $PHOENIX_CONF"
+}

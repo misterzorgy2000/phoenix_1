@@ -1,8 +1,8 @@
 from colorama import init
 
-from cow.conf import CONF
-from cow.app.api import run as run_api
-from cow.ai.service import launch_ai_service
+from phoenix.conf import CONF
+from phoenix.app.api import run as run_api
+from phoenix.ai.service import launch_ai_service
 
 init(autoreset=True)   
 

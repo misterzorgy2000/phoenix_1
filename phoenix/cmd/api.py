@@ -1,6 +1,6 @@
 from oslo_log import log
 
-from cow.app.api import run
+from phoenix.app.api import run
 
 LOG = log.getLogger(__name__)
 

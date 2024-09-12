@@ -2,9 +2,9 @@ from flask import Flask, request, jsonify
 import json
 import pandas as pd
 
-from cow.ai import CV_RESULTS_DIR, MODEL_VERSION_FILE
-from cow.conf import CONF
-from cow.ai.service import PhoenixAI
+from phoenix.ai import CV_RESULTS_DIR, MODEL_VERSION_FILE
+from phoenix.conf import CONF
+from phoenix.ai.service import PhoenixAI
 
 app = Flask(__name__)
 

@@ -1,6 +1,6 @@
 from oslo_config import cfg
 import sys
-from cow.conf import ai, api, gnocchi_client, schedule
+from phoenix.conf import ai, api, gnocchi_client, schedule
 
 from oslo_messaging._drivers import impl_rabbit
 

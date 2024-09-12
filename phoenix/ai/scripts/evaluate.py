@@ -4,8 +4,8 @@ import joblib
 import json
 import os
 
-from cow.conf import CONF
-from cow.ai import CV_RESULTS_DIR, DS_DATA_DIR, MODEL_DIR
+from phoenix.conf import CONF
+from phoenix.ai import CV_RESULTS_DIR, DS_DATA_DIR, MODEL_DIR
 
 # Model validation
 def evaluate_model(model_path):

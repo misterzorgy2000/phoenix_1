@@ -10,14 +10,14 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from oslo_service import service
 from oslo_log import log as logging
 
-from cow.conf import CONF
+from phoenix.conf import CONF
 
-from cow.notification import get_notifier
+from phoenix.notification import get_notifier
 
-from cow.ai import MODEL_DIR, MODEL_VERSION_FILE
-from cow.ai.scripts.data import save_metrics
-from cow.ai.scripts.fit import fit_model
-from cow.ai.scripts.evaluate import evaluate_model 
+from phoenix.ai import MODEL_DIR, MODEL_VERSION_FILE
+from phoenix.ai.scripts.data import save_metrics
+from phoenix.ai.scripts.fit import fit_model
+from phoenix.ai.scripts.evaluate import evaluate_model 
 
 PUBLISHER_ID = "ai"
 PROJECT = "ai"

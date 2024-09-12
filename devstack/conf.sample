@@ -9,5 +9,5 @@ CEILOMETER_BACKEND=gnocchi
 #RECLONE=yes
 disable_service etcd3
 enable_plugin ceilometer https://opendev.org/openstack/ceilometer stable/2023.2
-enable_plugin cow https://github.com/misterzorgy2000/cow.git main
+enable_plugin phoenix https://github.com/misterzorgy2000/phoenix.git main
 enable_plugin watcher https://opendev.org/openstack/watcher stable/2023.2

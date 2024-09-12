@@ -5,6 +5,7 @@ debug = True
 
 [api]
 host = 89.169.168.186
+port = 5678
 
 [ai]
 target='node_disk_read_bytes_total_y'
@@ -22,6 +23,7 @@ driver = messagingv2
 
 [gnocchi_client]
 api_version=1
+endpoint = localhost:8041
 endpoint_type=public
 timespan=1440
 
